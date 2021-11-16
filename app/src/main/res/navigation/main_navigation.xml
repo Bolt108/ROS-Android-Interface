@@ -77,5 +77,13 @@
         android:name="com.schneewittchen.rosandroid.ui.fragments.details.DetailContentFragment"
         android:label="DetailGroupOverviewFragment"
         tools:layout="@layout/fragment_detail_content"/>
-
+    <fragment
+        android:id="@+id/mapxusFragment"
+        android:name="com.schneewittchen.rosandroid.ui.fragments.map.MapxusFragment"
+        android:label="MapxusFragment" />
+    <action
+        android:id="@+id/action_to_mapxusFragment"
+        app:destination="@id/mapxusFragment"
+        app:popUpTo="@id/main_navigation"
+        app:popUpToInclusive="true" />
 </navigation>

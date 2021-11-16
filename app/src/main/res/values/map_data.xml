@@ -1,0 +1,18 @@
+<resources>
+    <string name="default_lat" translatable="false">22.3707866</string>
+    <string name="default_lon" translatable="false">114.1112654</string>
+
+    <string name="vivo_lat" translatable="false">23.0357815</string>
+    <string name="vivo_lon" translatable="false">113.1824111</string>
+
+    <string name="harbour_city_lat" translatable="false">22.296943</string>
+    <string name="harbour_city_lon" translatable="false">114.168458</string>
+    <string name="harbour_city_building_id" translatable="false">f20017ba7d9d41c0b277fc48b7a4bf02</string>
+
+    <string name="default_search_text_building_id" translatable="false">tsuenwanplaza_hk_369d01</string>
+    <string name="default_poi_id" translatable="false">12586</string>
+
+    <string name="route_plan_lat" translatable="false">22.296943</string>
+    <string name="route_plan_lon" translatable="false">114.168458</string>
+
+</resources>

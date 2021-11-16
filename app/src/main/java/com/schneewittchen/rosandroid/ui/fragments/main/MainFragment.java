@@ -104,6 +104,9 @@ public class MainFragment extends Fragment implements OnBackPressedListener {
                     case "SSH":
                         navController.navigate(R.id.action_to_sshFragment);
                         break;
+                    case "Map":
+                        navController.navigate(R.id.action_to_mapxusFragment);
+                        break;
                     default:
                         navController.navigate(R.id.action_to_vizFragment);
                 }

@@ -18,7 +18,7 @@ public class Viz2DEntity extends GroupEntity {
     public Viz2DEntity() {
         this.width = 8;
         this.height = 8;
-        this.frame = "map";
+        this.frame = "odom";
     }
     
 }

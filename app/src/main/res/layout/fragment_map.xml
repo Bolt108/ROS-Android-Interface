@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:rotation="0">
+
+    <!--    下面的是必须有的，没有的话，会报错。不能invisible-->
+    <TextureView
+        android:id="@+id/textureView123"
+        android:layout_width="1pt"
+        android:layout_height="1pt"
+        android:layout_gravity="center_horizontal|center_vertical">
+
+    </TextureView>
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:mapbox_cameraTargetLat="22.3707866"
+        app:mapbox_cameraTargetLng="114.1112654"
+        app:mapbox_cameraZoom="17" />
+
+
+
+</FrameLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<android.support.constraint.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    xmlns:android="http://schemas.android.com/apk/res/android"-->
+
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:layout_width="match_parent">-->
+
+<!--&lt;!&ndash;    <RelativeLayout&ndash;&gt;-->
+<!--&lt;!&ndash;        android:id="@+id/map_fragment"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        android:visibility="invisible"&ndash;&gt;-->
+<!--&lt;!&ndash;        tools:visibility="invisible">&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <org.osmdroid.views.MapView&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/mapview"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="match_parent"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:clickable="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:visibility="invisible"&ndash;&gt;-->
+<!--&lt;!&ndash;            tools:visibility="invisible" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <Button&ndash;&gt;-->
+<!--&lt;!&ndash;            android:id="@+id/recenter"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_width="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_alignParentStart="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_alignParentLeft="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:layout_alignParentBottom="true"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:text="@string/center"&ndash;&gt;-->
+<!--&lt;!&ndash;            android:visibility="invisible"&ndash;&gt;-->
+<!--&lt;!&ndash;            tools:visibility="invisible" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </RelativeLayout>&ndash;&gt;-->
+
+
+<!--    <android.support.constraint.ConstraintLayout android:id="@+id/map_container"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:animateLayoutChanges="true"-->
+<!--        android:padding="5dp"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.5"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.3"-->
+<!--        xmlns:android="http://schemas.android.com/apk/res/android">-->
+
+
+<!--<ImageView-->
+<!--  android:id="@+id/map"-->
+<!-- android:visibility="visible"-->
+<!-- android:layout_width="420dp"-->
+<!--  android:layout_height="600dp"-->
+<!-- app:layout_constraintBottom_toBottomOf="parent"-->
+<!-- app:layout_constraintEnd_toEndOf="parent"-->
+<!--      app:layout_constraintStart_toStartOf="parent"-->
+<!--  app:layout_constraintTop_toTopOf="parent"-->
+<!--            android:src="@drawable/icdc_map" />-->
+
+<!-- <ImageView-->
+<!--       android:id="@+id/user_marker"-->
+<!--      android:layout_width="22dp"-->
+<!--      android:layout_height="22dp"-->
+<!--      android:src="@drawable/location_pin"-->
+
+
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="parent"-->
+<!--             />-->
+
+<!--&lt;!&ndash;        app:layout_constraintBottom_toBottomOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintEnd_toEndOf="parent"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintHorizontal_bias="0.5"&ndash;&gt;-->
+<!--&lt;!&ndash;        app:layout_constraintVertical_bias="0.3"&ndash;&gt;-->
+
+
+<!--    </android.support.constraint.ConstraintLayout>-->
+
+<!--</android.support.constraint.ConstraintLayout>-->
+
+
+<!--<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:id="@+id/map_fragment"-->
+<!--    >-->
+
+<!--<org.osmdroid.views.MapView-->
+<!--    android:id="@+id/mapview"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    android:clickable="true" />-->
+
+<!--<Button-->
+<!-- android:id="@+id/recenter"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--    android:layout_alignParentStart="true"-->
+<!--    android:layout_alignParentLeft="true"-->
+<!--   android:layout_alignParentBottom="true"-->
+<!-- android:text="@string/center"/>-->
+
+<!--</RelativeLayout>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<com.schneewittchen.rosandroid.ui.activity.ICDCMapLayout-->
+<!--android:id="@+id/icdcmap"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_gravity="bottom">-->
+
+
+<!--</com.schneewittchen.rosandroid.ui.activity.ICDCMapLayout>-->
+
+<!--<TextView-->
+<!--android:id="@+id/textViewLog"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_marginLeft="20dp"-->
+<!--android:layout_marginTop="60dp"-->
+<!--android:background="#FFFFFF"-->
+<!--android:text="test"-->
+<!--android:textColor="#000000"-->
+<!--android:textSize="18sp" />-->
+
+<!--<TextView-->
+<!--android:id="@+id/textViewvlcLocMap"-->
+<!--android:layout_width="43dp"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_gravity="right"-->
+<!--android:layout_marginTop="60dp"-->
+<!--android:layout_marginRight="20dp"-->
+<!--android:background="#FFFFFF"-->
+<!--android:text="test"-->
+<!--android:textColor="#000000"-->
+<!--android:textSize="18sp" />-->

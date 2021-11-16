@@ -4,6 +4,7 @@ import com.schneewittchen.rosandroid.model.entities.widgets.SubscriberLayerEntit
 import com.schneewittchen.rosandroid.model.repositories.rosRepo.message.Topic;
 
 import geometry_msgs.PoseWithCovarianceStamped;
+import nav_msgs.Odometry;
 
 
 /**
@@ -19,6 +20,7 @@ public class PoseEntity extends SubscriberLayerEntity {
 
 
     public PoseEntity() {
-        this.topic = new Topic("/amcl_pose", PoseWithCovarianceStamped._TYPE);
+        this.topic = new Topic("/slovlp_ekf_info", PoseWithCovarianceStamped._TYPE);
+
     }
 }

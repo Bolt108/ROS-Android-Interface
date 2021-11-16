@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <com.mapbox.mapboxsdk.maps.MapView
+        android:id="@+id/mapView"
+        android:layout_width="411dp"
+        android:layout_height="731dp"
+        app:mapbox_cameraTargetLat="@string/default_lat"
+        app:mapbox_cameraTargetLng="@string/default_lon"
+        app:mapbox_cameraZoom="17"
+        tools:ignore="MissingConstraints">
+    </com.mapbox.mapboxsdk.maps.MapView>
+
+<!--    <ImageView-->
+<!--            android:id="@+id/imageViewLiPHY"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="80dp"-->
+<!--            android:layout_marginStart="100dp"-->
+<!--            android:layout_marginTop="264dp"-->
+<!--            android:layout_marginBottom="53dp"-->
+<!--            android:contentDescription="@string/light_bulb_representing_liphy_checkpoint"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/lightbulb"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/mapView"-->
+<!--            app:layout_constraintStart_toStartOf="@id/mapView"-->
+<!--            app:layout_constraintTop_toTopOf="@id/mapView"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/mapView"/>-->
+
+
+<!--        <ImageView-->
+<!--            android:id="@+id/imageViewRobot"-->
+<!--            android:layout_width="40dp"-->
+<!--            android:layout_height="50dp"-->
+<!--            android:layout_marginEnd="111dp"-->
+<!--            android:contentDescription="@string/robot_icon_showing_where_the_robot_is"-->
+<!--            android:scaleType="fitCenter"-->
+<!--            android:src="@drawable/robot"-->
+<!--            app:layout_constraintEnd_toEndOf="@id/mapView"-->
+<!--            app:layout_constraintStart_toStartOf="@id/mapView"-->
+<!--            app:layout_constraintTop_toTopOf="@id/mapView"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/mapView"/>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--<?xml version="1.0" encoding="utf-8"?>-->
+<!--<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:app="http://schemas.android.com/apk/res-auto"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent">-->
+
+
+<!--    <com.mapbox.mapboxsdk.maps.MapView-->
+<!--        android:id="@+id/mapView"-->
+<!--        android:layout_width="411dp"-->
+<!--        android:layout_height="731dp"-->
+<!--        app:mapbox_cameraTargetLat="@string/default_lat"-->
+<!--        app:mapbox_cameraTargetLng="@string/default_lon"-->
+<!--        app:mapbox_cameraZoom="17">-->
+
+<!--    </com.mapbox.mapboxsdk.maps.MapView>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageViewLiPHY"-->
+<!--        android:layout_width="71dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginStart="100dp"-->
+<!--        android:layout_marginTop="264dp"-->
+<!--        android:layout_marginBottom="53dp"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:src="@drawable/lightbulb"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/imageViewRobot"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        android:contentDescription="Light bulb representing LiPHY checkpoint"/>-->
+
+<!--    <ImageView-->
+<!--        android:id="@+id/imageViewRobot"-->
+<!--        android:layout_width="71dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:layout_marginEnd="111dp"-->
+<!--        android:scaleType="fitCenter"-->
+<!--        android:src="@drawable/robot"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/mapView"-->
+<!--        app:layout_constraintEnd_toEndOf="@+id/mapView"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/imageViewLiPHY"-->
+<!--        android:contentDescription="Robot icon showing where the robot is"/>-->
+

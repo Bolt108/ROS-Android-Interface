@@ -23,6 +23,8 @@
     <color name="whiteMedium">#999999</color>
     <color name="whiteLow">#616161</color>
     <color name="white4p">#09FFFFFF</color>
+    <color name="white">#FFFFFF</color>
+
 
     <color name="borderColor">@color/whiteLow</color>
     <color name="bgColor">@color/black00dp</color>

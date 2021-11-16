@@ -22,8 +22,10 @@ import java.nio.FloatBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
+import geometry_msgs.Pose;
 import geometry_msgs.PoseStamped;
 import geometry_msgs.PoseWithCovarianceStamped;
+import nav_msgs.Odometry;
 import nav_msgs.Path;
 
 
@@ -39,7 +41,7 @@ public class PoseView extends SubscriberLayerView {
     public static final String TAG = PoseView.class.getSimpleName();
 
     private Shape shape;
-    private PoseWithCovarianceStamped pose;
+    public PoseWithCovarianceStamped pose;
 
 
     public PoseView(Context context) {
@@ -61,8 +63,13 @@ public class PoseView extends SubscriberLayerView {
 
     @Override
     public void onNewMessage(Message message) {
+        Log.d(TAG, "Entered the onNewMessage function");
         pose = (PoseWithCovarianceStamped)message;
-
+        Log.d(TAG, "onNewMessage: \n");
+        Log.d(TAG, "the pose is:\n");
+        Log.d(TAG, String.valueOf(pose.getHeader().getSeq()));
+        Log.d(TAG, "\n");
+        Log.d(TAG, String.valueOf(pose.getPose().getPose().getPosition().getX()));
         GraphName source = GraphName.of(pose.getHeader().getFrameId());
         frame = source;
         FrameTransform frameTransform = TransformProvider.getInstance().getTree().transform(source, frame);
@@ -71,5 +78,9 @@ public class PoseView extends SubscriberLayerView {
 
         Transform poseTransform = Transform.fromPoseMessage(pose.getPose().getPose());
         shape.setTransform(frameTransform.getTransform().multiply(poseTransform));
+    }
+
+    public PoseWithCovarianceStamped getPose(){
+        return pose;
     }
 }

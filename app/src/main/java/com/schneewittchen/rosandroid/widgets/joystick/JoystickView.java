@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import androidx.annotation.Nullable;
 
 import com.schneewittchen.rosandroid.R;
+import com.schneewittchen.rosandroid.ui.fragments.map.MapxusFragment;
 import com.schneewittchen.rosandroid.ui.views.widgets.PublisherWidgetView;
 import com.schneewittchen.rosandroid.utility.Utils;
 
@@ -100,6 +101,8 @@ public class JoystickView extends PublisherWidgetView {
 
     @Override
     public void onDraw(Canvas canvas) {
+        //canvas = new Canvas();
+
         super.onDraw(canvas);
 
         float width = getWidth();

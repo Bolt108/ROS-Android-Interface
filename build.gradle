@@ -5,8 +5,15 @@ ext {
 buildscript {
     apply from: "https://github.com/rosjava/rosjava_bootstrap/raw/kinetic/buildscript.gradle"
 
+    repositories {
+        google()
+        flatDir {
+            dirs 'libs'
+        }
+    }
+
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.2.0'
+        classpath 'com.android.tools.build:gradle:4.2.2'
     }
 }
 
@@ -21,14 +28,27 @@ subprojects {
                 exclude "META-INF/LICENSE.txt"
                 exclude "META-INF/NOTICE.txt"
             }
+            // Configure only for each module that uses Java 8
+            // language features (either in its source code or
+            // through dependencies).
+            compileOptions {
+                sourceCompatibility = JavaVersion.VERSION_1_8
+                targetCompatibility = JavaVersion.VERSION_1_8
+            }
+
         }
     }
 }
 
 allprojects {
     repositories {
+        jcenter()
         google()
         maven { url 'https://repo1.maven.org/maven2' }
+
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 

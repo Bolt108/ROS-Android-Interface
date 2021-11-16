@@ -79,4 +79,10 @@
         <item>roscore</item>
     </string-array>
 
+    <string name="robotIconDescription">Robot icon showing where the robot is</string>
+    <string name="lightBulbDescription">Light bulb representing LiPHY checkpoint</string>
+    <string name="fragment_in_card_below" translatable="false">Map fragment container in card below</string>
+    <string name="robot_icon_showing_where_the_robot_is">Robot icon showing where the robot is</string>
+    <string name="light_bulb_representing_liphy_checkpoint">Light bulb representing LiPHY checkpoint</string>
+
 </resources>

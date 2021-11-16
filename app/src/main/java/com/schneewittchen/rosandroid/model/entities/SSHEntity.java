@@ -19,8 +19,8 @@ public class SSHEntity {
     public long id;
 
     public long configId;
-    public String ip = "192.168.1.1";
+    public String ip = "192.168.0.10";
     public int port = 22;
-    public String username = "pi";
-    public String password = "raspberry";
+    public String username = "ubuntu";
+    public String password = "ubuntu";
 }
