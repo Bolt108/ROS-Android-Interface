@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <com.schneewittchen.rosandroid.ui.fragments.map.MapxusPoseReceiver
+        android:id="@+id/mapxusView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp"
+        app:crossColor="#8000BCD4">
+        tools:ignore="MissingConstraints">
+    </com.schneewittchen.rosandroid.ui.fragments.map.MapxusPoseReceiver>
 
     <com.mapbox.mapboxsdk.maps.MapView
         android:id="@+id/mapView"

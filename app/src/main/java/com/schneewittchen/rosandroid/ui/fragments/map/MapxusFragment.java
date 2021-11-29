@@ -1,7 +1,9 @@
 package com.schneewittchen.rosandroid.ui.fragments.map;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,15 +31,39 @@ import com.mapxus.map.mapxusmap.api.services.RoutePlanning;
 import com.mapxus.map.mapxusmap.impl.MapboxMapViewProvider;
 import com.schneewittchen.rosandroid.R;
 import com.schneewittchen.rosandroid.model.entities.widgets.BaseEntity;
+import com.schneewittchen.rosandroid.model.repositories.rosRepo.message.RosData;
+import com.schneewittchen.rosandroid.model.repositories.rosRepo.message.Topic;
 import com.schneewittchen.rosandroid.model.repositories.rosRepo.node.BaseData;
 import com.schneewittchen.rosandroid.ui.fragments.viz.WidgetViewGroup;
 import com.schneewittchen.rosandroid.ui.general.DataListener;
 import com.schneewittchen.rosandroid.ui.general.WidgetChangeListener;
+import com.schneewittchen.rosandroid.ui.views.widgets.IBaseView;
+import com.schneewittchen.rosandroid.ui.views.widgets.ISubscriberView;
+import com.schneewittchen.rosandroid.ui.views.widgets.WidgetGroupView;
 import com.schneewittchen.rosandroid.viewmodel.VizViewModel;
 import com.schneewittchen.rosandroid.widgets.pose.PoseView;
-import com.schneewittchen.rosandroid.ui.fragments.map.MapxusPoseViewGroup;
+import com.schneewittchen.rosandroid.ui.fragments.map.MapxusPoseReceiver;
 import com.schneewittchen.rosandroid.ui.fragments.map.MapxusViewModel;
 import org.jetbrains.annotations.NotNull;
+import org.ros.concurrent.CancellableLoop;
+import org.ros.exception.ServiceNotFoundException;
+import org.ros.internal.message.Message;
+import org.ros.message.MessageFactory;
+import org.ros.message.MessageSerializationFactory;
+import org.ros.message.Time;
+import org.ros.namespace.GraphName;
+import org.ros.namespace.NodeNameResolver;
+import org.ros.node.ConnectedNode;
+import org.ros.node.NodeListener;
+import org.ros.node.parameter.ParameterTree;
+import org.ros.node.service.ServiceClient;
+import org.ros.node.service.ServiceResponseBuilder;
+import org.ros.node.service.ServiceServer;
+import org.ros.node.topic.Publisher;
+import org.ros.node.topic.Subscriber;
+
+import java.net.URI;
+import java.util.concurrent.ScheduledExecutorService;
 
 public class MapxusFragment extends Fragment implements OnMapReadyCallback, OnMapxusMapReadyCallback, DataListener, WidgetChangeListener {
 
@@ -45,20 +71,26 @@ public class MapxusFragment extends Fragment implements OnMapReadyCallback, OnMa
     private MapView mapView;
     private MapViewProvider mapViewProvider;
     private MapboxMap mapboxMap;
-    private MapxusViewModel mapxusViewModel;
-    private MapxusPoseViewGroup mapxusPoseViewGroup;
+    private MapxusViewModel mViewModel;
+    private MapxusPoseReceiver mapxusPoseViewGroup;
     private SymbolManager symbolManager;
     private OnSymbolClickListener onMapboxMarkerClickListener;
     private LocationComponentOptions mapBoxDefaultLocationComponentOptions;
     private LocationComponentActivationOptions mapBoxCustomLocationComponentActivationOptions;
     private Object mapBoxDefaultLocationComponentActivationOptions;
     private LocationComponentOptions mapBoxCustomLocationOptions;
+    private double[] location_coors = new double[2];
+    private PoseSubscriber poseSubscriber;
 
 
     @Override
     public void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        mViewModel = new ViewModelProvider(this).get(MapxusViewModel.class);
+//        mViewModel.getData().observe(getViewLifecycleOwner(), data -> {
+//            mViewModel.onNewData(data);
+//        });
     }
 
     @Nullable
@@ -66,6 +98,10 @@ public class MapxusFragment extends Fragment implements OnMapReadyCallback, OnMa
     @Override
     public View onCreateView(@NonNull @NotNull LayoutInflater inflater, @Nullable @org.jetbrains.annotations.Nullable ViewGroup container, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_mapxus_map, container, false);
+        poseSubscriber.onStart((ConnectedNode) this);
+        location_coors = poseSubscriber.getDarr();
+        Log.d("XCoor: ", String.valueOf(location_coors[0]));
+        Log.d("YCoor: ", String.valueOf(location_coors[1]));
 
         mapView = v.findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
@@ -75,6 +111,18 @@ public class MapxusFragment extends Fragment implements OnMapReadyCallback, OnMa
 
         mapViewProvider.getMapxusMapAsync(this);
 
+        mViewModel = new ViewModelProvider(this).get(MapxusViewModel.class);
+        mViewModel.getCurrentWidgets().observe(getViewLifecycleOwner(), widgetEntities -> {
+            mapxusPoseViewGroup.setWidgets(widgetEntities);
+        });
+        mViewModel.getData().observe(getViewLifecycleOwner(), data -> {
+            mapxusPoseViewGroup.onNewData(data);
+            //mViewModel.onNewData(data);
+
+//            location_coors[0] = mViewModel.getLocArray()[0];
+//            location_coors[1] = mViewModel.getLocArray()[1];
+
+        });
         return v;
     }
 
@@ -162,22 +210,20 @@ public class MapxusFragment extends Fragment implements OnMapReadyCallback, OnMa
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mapxusPoseViewGroup = view.findViewById(R.id.mapView);
+        mapxusPoseViewGroup = view.findViewById(R.id.mapxusView);
         mapxusPoseViewGroup.setDataListener(this);
         mapxusPoseViewGroup.setOnWidgetDetailsChanged(this);
-
-        mapxusViewModel = new ViewModelProvider(this).get(MapxusViewModel.class);
-
-        mapxusViewModel.getCurrentWidgets().observe(getViewLifecycleOwner(), widgetEntities -> {
-            mapxusPoseViewGroup.setWidgets(widgetEntities);
-        });
-
-        mapxusViewModel.getData().observe(getViewLifecycleOwner(), data -> {
-            mapxusPoseViewGroup.onNewData(data);
-        });
+//
+//        mapxusViewModel = new ViewModelProvider(this).get(MapxusViewModel.class);
+//
+//        mapxusViewModel.getCurrentWidgets().observe(getViewLifecycleOwner(), widgetEntities -> {
+//            mapxusPoseViewGroup.setWidgets(widgetEntities);
+//        });
+//
+//        mapxusViewModel.getData().observe(getViewLifecycleOwner(), data -> {
+//            mapxusPoseViewGroup.onNewData(data);
+//        });
     }
-
-
 
     @Override
     public void onDestroyView() {
@@ -206,6 +252,16 @@ public class MapxusFragment extends Fragment implements OnMapReadyCallback, OnMa
         mapxusMap.addMarker(LiPHYMarker);
     }
 
+    @Override
+    public void onNewWidgetData(BaseData data) {
+        mViewModel.publishData(data);
+    }
+
+    @Override
+    public void onWidgetDetailsChanged(BaseEntity widgetEntity) {
+        mViewModel.updateWidget(widgetEntity);
+    }
+
 //    @Override
 //    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
 //        super.onActivityCreated(savedInstanceState);
@@ -232,14 +288,6 @@ public class MapxusFragment extends Fragment implements OnMapReadyCallback, OnMa
 //            }
 //        });
 //    }
-    @Override
-    public void onNewWidgetData(BaseData data) {
-        mapxusViewModel.publishData(data);
-    }
 
-    @Override
-    public void onWidgetDetailsChanged(BaseEntity widgetEntity) {
-        mapxusViewModel.updateWidget(widgetEntity);
-    }
 }
 

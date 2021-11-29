@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.schneewittchen.rosandroid.model.entities.widgets.BaseEntity;
 import com.schneewittchen.rosandroid.model.repositories.rosRepo.TransformProvider;
+import com.schneewittchen.rosandroid.ui.fragments.map.MapxusViewModel;
 import com.schneewittchen.rosandroid.ui.opengl.shape.GoalShape;
 import com.schneewittchen.rosandroid.ui.opengl.shape.Shape;
 import com.schneewittchen.rosandroid.ui.opengl.visualisation.ROSColor;
@@ -39,7 +40,6 @@ import nav_msgs.Path;
 public class PoseView extends SubscriberLayerView {
 
     public static final String TAG = PoseView.class.getSimpleName();
-
     private Shape shape;
     public PoseWithCovarianceStamped pose;
 
@@ -48,7 +48,6 @@ public class PoseView extends SubscriberLayerView {
         super(context);
         shape = new GoalShape();
     }
-
 
     public void setWidgetEntity(BaseEntity widgetEntity) {
         super.setWidgetEntity(widgetEntity);
@@ -80,7 +79,8 @@ public class PoseView extends SubscriberLayerView {
         shape.setTransform(frameTransform.getTransform().multiply(poseTransform));
     }
 
-    public PoseWithCovarianceStamped getPose(){
-        return pose;
+    public void setPose(PoseWithCovarianceStamped message){
+         pose = message;
     }
+    public PoseWithCovarianceStamped getPose(){return pose;}
 }

@@ -33,9 +33,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class MapxusPoseViewGroup extends ViewGroup {
+public class MapxusPoseReceiver extends ViewGroup {
 
-    public static final String TAG = MapxusPoseViewGroup.class.getSimpleName();
+    public static final String TAG = MapxusPoseReceiver.class.getSimpleName();
 //    public static final int TILES_X = 8;
 
     Paint crossPaint;
@@ -51,7 +51,7 @@ public class MapxusPoseViewGroup extends ViewGroup {
     Position widgetScaleShadowPosition = null;
 
 
-    public MapxusPoseViewGroup(Context context, AttributeSet attrs) {
+    public MapxusPoseReceiver(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         this.widgetList = new ArrayList<>();
@@ -201,13 +201,14 @@ public class MapxusPoseViewGroup extends ViewGroup {
 
             if(!(view instanceof ISubscriberView)) continue;
 
-            if(view instanceof MapxusPoseViewGroup) {
-                ((MapxusPoseViewGroup)view).onNewData(data);
+            if(view instanceof MapxusPoseReceiver) {
+                ((MapxusPoseReceiver)view).onNewData(data);
 
             } else {
                 IBaseView baseView = (IBaseView) view;
 
                 if (baseView.getWidgetEntity().topic.equals(topic)){
+                    Log.d(TAG, baseView.getWidgetEntity().name.toString());
                     ((ISubscriberView)view).onNewMessage(message);
                 }
             }

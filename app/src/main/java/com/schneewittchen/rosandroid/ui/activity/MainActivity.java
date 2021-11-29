@@ -15,6 +15,8 @@ import com.schneewittchen.rosandroid.ui.fragments.intro.IntroFragment;
 import com.schneewittchen.rosandroid.ui.fragments.main.MainFragment;
 import com.schneewittchen.rosandroid.ui.fragments.main.OnBackPressedListener;
 
+import org.ros.android.RosActivity;
+
 
 /**
  * TODO: Description
